@@ -20,6 +20,7 @@
 html {
   background: var(--bg);
   color: var(--fg);
+  overflow-x: clip;
 }
 
 body {
@@ -64,19 +65,37 @@ h3 {
     max(1.4rem, env(safe-area-inset-left));
 }
 
+.page-home {
+  padding-top: clamp(2.75rem, 10vh, 12vh);
+}
+
 .memtest {
-  margin: 0 0 2rem;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-top: 0;
+  margin-bottom: clamp(3rem, 4vw, 5rem);
+  padding-inline: max(1rem, env(safe-area-inset-left));
   color: #c2c6cf;
   font-family: Silkscreen, ui-monospace, monospace;
-  font-size: 16px;
-  line-height: 1;
+  font-size: clamp(2rem, 7vw, 5rem);
+  line-height: 1.15;
   letter-spacing: 0;
+  text-align: center;
   -webkit-font-smoothing: none;
   font-smooth: never;
 }
 
 .memtest-run {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 0.35em;
   white-space: pre;
+}
+
+.mem-lead {
+  white-space: nowrap;
 }
 
 .mem-ch,
@@ -128,20 +147,6 @@ h3 {
     animation: none;
     opacity: 1;
     transform: none;
-  }
-}
-
-@media (min-width: 48rem) and (min-height: 40rem) {
-  .page-home {
-    padding-top: 42vh;
-  }
-
-  .page-home .memtest {
-    position: absolute;
-    top: clamp(1.6rem, 7vh, 3.25rem);
-    left: max(1.4rem, env(safe-area-inset-left));
-    right: max(1.4rem, env(safe-area-inset-right));
-    margin: 0;
   }
 }
 

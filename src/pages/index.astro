@@ -10,19 +10,21 @@ const memory = "MEMORY TEST".split("");
 <Base home>
   <p class="memtest" aria-label="MEMORY TEST... OK">
     <span class="memtest-run" aria-hidden="true">
-      {
-        memory.map((ch, i) => (
-          <span class="mem-ch" style={`--i:${i}`}>
-            {ch}
-          </span>
-        ))
-      }
-      <span class="mem-dots">
-        <span style="--d:0">.</span>
-        <span style="--d:1">.</span>
-        <span style="--d:2">.</span>
+      <span class="mem-lead">
+        {
+          memory.map((ch, i) => (
+            <span class="mem-ch" style={`--i:${i}`}>
+              {ch}
+            </span>
+          ))
+        }
+        <span class="mem-dots">
+          <span style="--d:0">.</span>
+          <span style="--d:1">.</span>
+          <span style="--d:2">.</span>
+        </span>
       </span>
-      <span class="mem-ok"> OK</span>
+      <span class="mem-ok">OK</span>
     </span>
   </p>
   {
