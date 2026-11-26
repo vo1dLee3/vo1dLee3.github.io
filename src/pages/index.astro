@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import { formatDate, isoDate } from '../utils/date';
+import { getPosts } from '../utils/posts';
+
+const posts = await getPosts();
+---
+
+<Base>
+  <h1 class="sr-only">vo1dLee3</h1>
+  {
+    posts.length === 0 ? (
+      <p class="empty">还没有笔记。</p>
+    ) : (
+      <ul class="posts">
+        {posts.map((post) => (
+          <li>
+            <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
+            <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</Base>
