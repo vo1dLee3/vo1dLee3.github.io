@@ -1,4 +1,5 @@
 ---
+import '../styles/fonts.css';
 import '../styles/global.css';
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
 }
 
 const { title, description = 'vo1dLee3' } = Astro.props;
-const pageTitle = title ? `${title} • vo1dLee3` : 'vo1dLee3';
+const pageTitle = title ?? 'vo1dLee3';
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -20,29 +21,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.href} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="alternate" type="application/rss+xml" title="vo1dLee3" href="/rss.xml" />
-    <meta name="theme-color" content="#222427" />
+    <meta name="theme-color" content="#12100e" />
   </head>
   <body>
-    <a class="skip" href="#content">跳到正文</a>
-    <div class="shell">
-      <header class="site-header">
-        <a class="brand" href="/">
-          <!-- Cactus mark from astro-theme-cactus, MIT © 2022 Chris Williams -->
-          <svg class="mark" aria-hidden="true" fill="none" viewBox="0 0 272 480" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#cdffb8" d="M181.334 93.333v-40L226.667 80v40zM136.001 53.333 90.667 26.667v426.666L136.001 480zM45.333 220 0 193.334v140L45.333 360z"></path>
-            <path fill="#d482ab" d="M90.667 26.667 136.001 0l45.333 26.667-45.333 26.666zM181.334 53.33l45.333-26.72L272 53.33 226.667 80zM136 240l-45.333-26.67v53.34zM0 193.33l45.333-26.72 45.334 26.72L45.333 220zM181.334 93.277 226.667 120l-45.333 26.67z"></path>
-            <path fill="#2abc89" d="m136 53.333 45.333-26.666v120L226.667 120V80L272 53.333V160l-90.667 53.333v240L136 480V306.667L45.334 360V220l45.333-26.667v73.334L136 240z"></path>
-          </svg>
-          vo1dLee3
-        </a>
-        <nav class="nav" aria-label="站点">
-          <a href="/rss.xml">RSS</a>
-        </nav>
-      </header>
-      <main id="content">
-        <slot />
-      </main>
-    </div>
+    <main class="page">
+      <slot />
+    </main>
   </body>
 </html>

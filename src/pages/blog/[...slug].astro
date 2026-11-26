@@ -24,7 +24,7 @@ const description = typeof extra.description === 'string' ? extra.description : 
 
 <Base title={post.data.title} description={description}>
   <article>
-    <h1 class="title">{post.data.title}</h1>
+    <h1 class="post-title">{post.data.title}</h1>
     <p class="post-date">
       <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
     </p>

@@ -7,19 +7,20 @@ const posts = await getPosts();
 ---
 
 <Base>
-  <h1 class="sr-only">vo1dLee3</h1>
   {
     posts.length === 0 ? (
       <p class="empty">还没有笔记。</p>
     ) : (
-      <ul class="posts">
+      <ol class="index">
         {posts.map((post) => (
           <li>
-            <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
-            <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+            <a href={`/blog/${post.id}/`}>
+              <span class="index-title">{post.data.title}</span>
+              <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
+            </a>
           </li>
         ))}
-      </ul>
+      </ol>
     )
   }
 </Base>
