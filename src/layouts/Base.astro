@@ -6,9 +6,10 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  home?: boolean;
 }
 
-const { title, description = 'vo1dLee3' } = Astro.props;
+const { title, description = 'vo1dLee3', home = false } = Astro.props;
 const pageTitle = title ?? 'vo1dLee3';
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -27,7 +28,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="theme-color" content="#101216" />
   </head>
   <body>
-    <main class="page">
+    <main class:list={["page", home && "page-home"]}>
       <slot />
     </main>
   </body>

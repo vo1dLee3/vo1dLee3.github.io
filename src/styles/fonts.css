@@ -1,4 +1,13 @@
-/* Charter (Bitstream) and JetBrains Mono. Latin woff2 only, font-display: swap. */
+/* Charter (Bitstream), JetBrains Mono, and Silkscreen (OFL). Latin woff2, font-display: swap. */
+
+@font-face {
+  font-family: Silkscreen;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../../fonts/silkscreen-memtest.woff2") format("woff2");
+  unicode-range: U+0020, U+002E, U+0045, U+004B, U+004D, U+004F, U+0052, U+0053, U+0054, U+0059;
+}
 
 @font-face {
   font-family: Charter;
