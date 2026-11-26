@@ -9,7 +9,7 @@
   --quote: #c5cbd6;
   --rule: #2c323c;
   --code: #171a21;
-  --serif: Charter, Georgia, "LXGW WenKai", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", serif;
+  --serif: Charter, Georgia, "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", serif;
   --mono: "JetBrains Mono", "Sarasa Mono SC", ui-monospace, monospace;
 }
 
@@ -113,6 +113,21 @@ h3 {
   .index li + li {
     margin-top: 1.65rem;
   }
+}
+
+.back {
+  margin: 0 0 1.6rem;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.back a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.back a:hover {
+  color: var(--accent);
 }
 
 .post-title {
