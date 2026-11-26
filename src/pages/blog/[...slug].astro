@@ -24,7 +24,7 @@ const description = typeof extra.description === 'string' ? extra.description : 
 
 <Base title={post.data.title} description={description}>
   <article>
-    <p class="back"><a href="/">← 返回</a></p>
+    <p class="back"><a href="/" aria-label="返回首页">←</a></p>
     <h1 class="post-title">{post.data.title}</h1>
     <p class="post-date">
       <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
