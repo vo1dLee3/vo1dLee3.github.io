@@ -5,14 +5,19 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/subset-wenkai.mjs",
     "build": "astro build",
     "preview": "astro preview"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.6",
-    "@fontsource-variable/newsreader": "^5.3.0",
-    "@fontsource/ibm-plex-mono": "^5.3.0",
-    "@fontsource/noto-serif-sc": "^5.3.1",
-    "astro": "^7.4.13"
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/lxgw-wenkai": "^5.3.0",
+    "astro": "^7.4.13",
+    "charter-webfont": "^4.1.0"
+  },
+  "devDependencies": {
+    "fontkit": "^3.0.0",
+    "subset-font": "^2.9.0"
   }
 }

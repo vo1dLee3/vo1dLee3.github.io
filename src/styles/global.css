@@ -1,14 +1,16 @@
 :root {
   color-scheme: dark;
-  --bg: #12100e;
-  --fg: #e8e2d6;
-  --muted: #8f867a;
-  --quote: #d2c4ae;
-  --rule: #3f362e;
-  --code: #1b1815;
-  --serif: "Newsreader Variable", "Noto Serif SC", "Songti SC", "Source Han Serif SC",
-    "Noto Serif CJK SC", "STSong", PMingLiU, serif;
-  --mono: "IBM Plex Mono", "Sarasa Mono SC", "Noto Sans Mono CJK SC", ui-monospace, monospace;
+  --bg: #101216;
+  --fg: #e6e8ee;
+  --muted: #8d93a0;
+  --date: #8ea89a;
+  --accent: oklch(70.91% 0.1415 163.7);
+  --accent-hover: oklch(80% 0.13 163.7);
+  --quote: #c5cbd6;
+  --rule: #2c323c;
+  --code: #171a21;
+  --serif: Charter, Georgia, "LXGW WenKai", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", serif;
+  --mono: "JetBrains Mono", "Sarasa Mono SC", ui-monospace, monospace;
 }
 
 * {
@@ -40,8 +42,8 @@ body {
 }
 
 ::selection {
-  background: #3c342c;
-  color: #f4efe6;
+  background: #1c3a32;
+  color: #f3f7f5;
 }
 
 :focus-visible {
@@ -73,29 +75,44 @@ h3 {
 }
 
 .index a {
-  display: block;
+  display: grid;
+  grid-template-columns: 7.6rem minmax(0, 1fr);
+  column-gap: 1.35rem;
+  align-items: baseline;
   color: inherit;
   text-decoration: none;
 }
 
-.index-title {
-  display: block;
-  font-size: 1.35rem;
+.index time {
+  text-align: right;
+  font-style: italic;
+  font-size: 0.8rem;
   line-height: 1.4;
+  color: var(--date);
 }
 
-.index time {
-  display: block;
-  margin-top: 0.28rem;
-  color: var(--muted);
-  font-size: 0.84rem;
+.index-title {
+  color: var(--accent);
+  font-size: 1.22rem;
   line-height: 1.45;
 }
 
 .index a:hover .index-title {
+  color: var(--accent-hover);
   text-decoration: underline;
   text-underline-offset: 0.18em;
   text-decoration-thickness: 1px;
+}
+
+@media (max-width: 40rem) {
+  .index a {
+    grid-template-columns: 6.7rem minmax(0, 1fr);
+    column-gap: 0.9rem;
+  }
+
+  .index li + li {
+    margin-top: 1.65rem;
+  }
 }
 
 .post-title {
@@ -108,7 +125,8 @@ h3 {
 
 .post-date {
   margin: 0.7rem 0 0;
-  color: var(--muted);
+  color: var(--date);
+  font-style: italic;
   font-size: 0.84rem;
   line-height: 1.45;
 }
@@ -143,14 +161,15 @@ h3 {
 }
 
 .prose a {
-  color: inherit;
+  color: var(--accent);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
-  text-decoration-color: #6e6256;
+  text-decoration-color: color-mix(in oklch, var(--accent) 45%, transparent);
 }
 
 .prose a:hover {
-  text-decoration-color: var(--fg);
+  color: var(--accent-hover);
+  text-decoration-color: var(--accent-hover);
 }
 
 .prose h2,
@@ -172,7 +191,7 @@ h3 {
 
 .prose strong {
   font-weight: 400;
-  color: #f6f1e8;
+  color: #f4f6fa;
 }
 
 .prose em {
@@ -251,6 +270,6 @@ h3 {
 }
 
 .miss a {
-  color: var(--fg);
+  color: var(--accent);
   text-underline-offset: 0.2em;
 }
