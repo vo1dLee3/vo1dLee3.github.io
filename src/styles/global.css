@@ -25,6 +25,8 @@ html {
 
 body {
   margin: 0;
+  max-width: 100%;
+  overflow-x: clip;
   min-height: 100vh;
   background: var(--bg);
   color: var(--fg);
@@ -337,23 +339,57 @@ html.intro-seen .index-in {
   font-weight: 400;
 }
 
-.index a:hover,
+@media (hover: hover) {
+  .index a:hover {
+    color: #e0a040;
+  }
+
+  .index a:hover time,
+  .index a:hover .index-title {
+    color: #e0a040;
+    text-shadow: 0 0 6px rgb(224 160 64 / 0.35);
+  }
+
+  .index a:hover .index-title::before {
+    opacity: 1;
+    animation: caret-blink 1.05s steps(1, end) infinite;
+  }
+}
+
 .index a:focus-visible {
   color: #e0a040;
 }
 
-.index a:hover time,
-.index a:hover .index-title,
 .index a:focus-visible time,
 .index a:focus-visible .index-title {
   color: #e0a040;
   text-shadow: 0 0 6px rgb(224 160 64 / 0.35);
 }
 
-.index a:hover .index-title::before,
 .index a:focus-visible .index-title::before {
   opacity: 1;
   animation: caret-blink 1.05s steps(1, end) infinite;
+}
+
+@media (hover: none) {
+  .index a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .index-title::before {
+    content: none;
+    width: 0;
+    margin: 0;
+  }
+
+  .index a:active time,
+  .index a:active .index-title {
+    color: #e8b45a;
+  }
+
+  .back a:active {
+    color: var(--accent);
+  }
 }
 
 @keyframes caret-blink {
@@ -402,8 +438,15 @@ html.intro-seen .index-in {
   text-decoration: none;
 }
 
-.back a:hover {
-  color: var(--accent);
+@media (hover: hover) {
+  .back a:hover {
+    color: var(--accent);
+  }
+
+  .prose a:hover {
+    color: var(--accent-hover);
+    text-decoration-color: var(--accent-hover);
+  }
 }
 
 .post-title {
@@ -420,6 +463,12 @@ html.intro-seen .index-in {
   font-style: italic;
   font-size: 0.84rem;
   line-height: 1.45;
+}
+
+article,
+.prose {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .prose {
@@ -454,15 +503,12 @@ html.intro-seen .index-in {
 
 .prose a {
   color: var(--accent);
+  overflow-wrap: anywhere;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
   text-decoration-color: color-mix(in oklch, var(--accent) 45%, transparent);
 }
 
-.prose a:hover {
-  color: var(--accent-hover);
-  text-decoration-color: var(--accent-hover);
-}
 
 .prose h1,
 .prose h2,
@@ -563,6 +609,13 @@ html.intro-seen .index-in {
   color: #d8d2c6;
 }
 
+.prose .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
 .prose th[align="left"],
 .prose td[align="left"] { text-align: left; }
 .prose th[align="center"],
@@ -598,7 +651,9 @@ html.intro-seen .index-in {
 }
 
 .prose pre {
+  max-width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 1rem 1.1rem;
   border-radius: 3px;
   line-height: 1.65;
@@ -616,7 +671,11 @@ html.intro-seen .index-in {
 }
 
 .prose table {
+  display: block;
   width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border-collapse: collapse;
   font-size: 0.95em;
 }
@@ -637,4 +696,53 @@ html.intro-seen .index-in {
 .miss a {
   color: var(--accent);
   text-underline-offset: 0.2em;
+}
+
+@media (max-width: 430px) {
+  .page {
+    padding: 2.5rem max(1.2rem, env(safe-area-inset-right)) 3.25rem
+      max(1.2rem, env(safe-area-inset-left));
+  }
+
+  .page-home {
+    padding-top: max(1.5rem, 5vh);
+  }
+
+  .memtest {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 2rem;
+    padding-inline: 0;
+  }
+
+  .memtest-run {
+    white-space: nowrap;
+  }
+
+  .index a {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.15rem;
+    align-items: start;
+    min-height: 2.75rem;
+    padding-block: 0.4rem;
+  }
+
+  .index time {
+    text-align: left;
+  }
+
+  .index-title,
+  .post-title {
+    overflow-wrap: anywhere;
+  }
+
+  .index li + li {
+    margin-top: 0.2rem;
+  }
+
+  .prose {
+    font-size: 1.125rem;
+    line-height: 1.9;
+  }
 }

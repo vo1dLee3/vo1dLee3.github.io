@@ -53,10 +53,17 @@ const posts = await getPosts();
       var text = run.getBoundingClientRect();
       var ps = getComputedStyle(parentEl);
       var inset = parseFloat(ps.paddingLeft) + parseFloat(ps.borderLeftWidth);
-      list.style.width = text.width + "px";
-      list.style.maxWidth = "none";
-      list.style.marginLeft = (text.left - parent.left - inset) + "px";
+      var left = text.left - parent.left - inset;
+      var phone = window.matchMedia("(max-width: 430px)").matches;
+      list.style.marginLeft = left + "px";
       list.style.marginRight = "0";
+      list.style.maxWidth = "none";
+      if (phone) {
+        var padR = parseFloat(ps.paddingRight) + parseFloat(ps.borderRightWidth);
+        list.style.width = Math.max(0, parent.width - inset - padR - left) + "px";
+      } else {
+        list.style.width = text.width + "px";
+      }
     }
     align();
     window.addEventListener("resize", align);
