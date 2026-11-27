@@ -10,6 +10,16 @@ interface Props {
 }
 
 const { title, description = 'vo1dLee3', home = false } = Astro.props;
+const introScript = `(function () {
+  var key = "vo1d-intro";
+  var seen = false;
+  try { seen = sessionStorage.getItem(key) === "1"; } catch (e) {}
+  if (seen) document.documentElement.classList.add("intro-seen");
+  else { try { sessionStorage.setItem(key, "1"); } catch (e) {} }
+  window.addEventListener("pageshow", function (ev) {
+    if (ev.persisted) document.documentElement.classList.add("intro-seen");
+  });
+})();`;
 const pageTitle = title ?? 'vo1dLee3';
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -26,6 +36,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#000" />
+    {home && <script is:inline set:html={introScript} />}
   </head>
   <body>
     <main class:list={["page", home && "page-home"]}>

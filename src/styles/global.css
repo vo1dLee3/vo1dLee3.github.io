@@ -248,6 +248,35 @@ h3 {
   }
 }
 
+html.intro-seen .crt-beam {
+  display: none;
+}
+
+html.intro-seen .memtest-run,
+html.intro-seen .mem-lead,
+html.intro-seen .mem-ok {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+html.intro-seen .mem-lead {
+  color: #d8d2c6;
+  text-shadow: 0 0 6px rgb(216 210 198 / 0.35);
+}
+
+html.intro-seen .mem-ok {
+  color: var(--accent);
+  text-shadow: 0 0 6px rgb(224 160 64 / 0.4);
+}
+
+html.intro-seen .index,
+html.intro-seen .index-wait,
+html.intro-seen .index-in {
+  opacity: 1;
+  animation: none;
+}
+
 .index {
   list-style: none;
   width: min(100%, 40rem);
