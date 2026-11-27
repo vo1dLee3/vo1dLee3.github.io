@@ -1,4 +1,5 @@
 ---
+import 'katex/dist/katex.min.css';
 import '../styles/fonts.css';
 import '../generated/cjk.css';
 import '../styles/global.css';
@@ -11,13 +12,22 @@ interface Props {
 
 const { title, description = 'vo1dLee3', home = false } = Astro.props;
 const introScript = `(function () {
-  var key = "vo1d-intro";
-  var seen = false;
-  try { seen = sessionStorage.getItem(key) === "1"; } catch (e) {}
-  if (seen) document.documentElement.classList.add("intro-seen");
-  else { try { sessionStorage.setItem(key, "1"); } catch (e) {} }
+  function skip() { document.documentElement.classList.add("intro-seen"); }
+  function navType() {
+    var nav = performance.getEntriesByType("navigation")[0];
+    return nav && nav.type;
+  }
+  function fromPost() {
+    try {
+      if (!document.referrer) return false;
+      var url = new URL(document.referrer);
+      return url.origin === location.origin && url.pathname.indexOf("/blog/") === 0;
+    } catch (e) { return false; }
+  }
+  var type = navType();
+  if (type === "back_forward" || (type !== "reload" && fromPost())) skip();
   window.addEventListener("pageshow", function (ev) {
-    if (ev.persisted) document.documentElement.classList.add("intro-seen");
+    if (ev.persisted || navType() === "back_forward") skip();
   });
 })();`;
 const pageTitle = title ?? 'vo1dLee3';

@@ -36,9 +36,34 @@ const posts = await getPosts();
 
 <script is:inline>
   (function () {
+    var list = document.querySelector(".index");
+    var run = document.querySelector(".memtest-run");
+    function warming(el) {
+      var t = getComputedStyle(el).transform;
+      if (!t || t === "none") return false;
+      var m = t.match(/matrix\(([^)]+)\)/);
+      if (!m) return true;
+      var p = m[1].split(",").map(Number);
+      return Math.abs(p[0] - 1) > 0.02 || Math.abs(p[3] - 1) > 0.02;
+    }
+    function align() {
+      if (!list || !run || warming(run)) return;
+      var parentEl = list.parentElement;
+      var parent = parentEl.getBoundingClientRect();
+      var text = run.getBoundingClientRect();
+      var ps = getComputedStyle(parentEl);
+      var inset = parseFloat(ps.paddingLeft) + parseFloat(ps.borderLeftWidth);
+      list.style.width = text.width + "px";
+      list.style.maxWidth = "none";
+      list.style.marginLeft = (text.left - parent.left - inset) + "px";
+      list.style.marginRight = "0";
+    }
+    align();
+    window.addEventListener("resize", align);
+    if (document.fonts) document.fonts.ready.then(align);
+    if (run) run.addEventListener("animationend", align);
     if (document.documentElement.classList.contains("intro-seen")) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    var list = document.querySelector(".index");
     var ok = document.querySelector(".mem-ok");
     if (!list) return;
     var shown = false;
@@ -48,6 +73,7 @@ const posts = await getPosts();
       shown = true;
       list.classList.remove("index-wait");
       list.classList.add("index-in");
+      align();
     }
     if (ok) ok.addEventListener("animationend", show);
     setTimeout(show, 2600);

@@ -10,10 +10,16 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.10",
     "@astrojs/sitemap": "^3.7.6",
     "@fontsource/jetbrains-mono": "^5.3.0",
     "astro": "^7.4.13",
-    "charter-webfont": "^4.1.0"
+    "charter-webfont": "^4.1.0",
+    "katex": "^0.19.1",
+    "rehype-katex": "^7.0.1",
+    "remark-breaks": "^4.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "fontkit": "^3.0.0",
