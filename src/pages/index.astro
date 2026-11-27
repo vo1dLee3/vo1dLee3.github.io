@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { formatDate, isoDate } from '../utils/date';
+import { isoDate } from '../utils/date';
 import { getPosts } from '../utils/posts';
 
 const posts = await getPosts();
@@ -24,7 +24,7 @@ const posts = await getPosts();
         {posts.map((post) => (
           <li>
             <a href={`/blog/${post.id}/`}>
-              <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
+              <time datetime={isoDate(post.data.date)}>{isoDate(post.data.date)}</time>
               <span class="index-title">{post.data.title}</span>
             </a>
           </li>
@@ -33,3 +33,22 @@ const posts = await getPosts();
     )
   }
 </Base>
+
+<script is:inline>
+  (function () {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var list = document.querySelector(".index");
+    var ok = document.querySelector(".mem-ok");
+    if (!list) return;
+    var shown = false;
+    list.classList.add("index-wait");
+    function show() {
+      if (shown) return;
+      shown = true;
+      list.classList.remove("index-wait");
+      list.classList.add("index-in");
+    }
+    if (ok) ok.addEventListener("animationend", show);
+    setTimeout(show, 2600);
+  })();
+</script>

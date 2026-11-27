@@ -250,18 +250,32 @@ h3 {
 
 .index {
   list-style: none;
-  margin: 0;
+  width: min(100%, 40rem);
+  margin: 0 auto;
   padding: 0;
 }
 
+.index-wait {
+  opacity: 0;
+}
+
+.index-in {
+  animation: index-fade 400ms ease forwards;
+}
+
+@keyframes index-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .index li + li {
-  margin-top: 2.15rem;
+  margin-top: 1.35rem;
 }
 
 .index a {
   display: grid;
-  grid-template-columns: 7.6rem minmax(0, 1fr);
-  column-gap: 1.35rem;
+  grid-template-columns: 7.25rem minmax(0, 1fr);
+  column-gap: 1.1rem;
   align-items: baseline;
   color: inherit;
   text-decoration: none;
@@ -269,10 +283,12 @@ h3 {
 
 .index time {
   text-align: right;
-  font-style: italic;
-  font-size: 0.8rem;
-  line-height: 1.4;
-  color: var(--date);
+  font-family: VT323, ui-monospace, monospace;
+  font-style: normal;
+  font-size: 1.55rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--muted);
 }
 
 .index-title {
@@ -281,16 +297,57 @@ h3 {
   line-height: 1.45;
 }
 
-.index a:hover .index-title {
-  color: var(--accent-hover);
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
-  text-decoration-thickness: 1px;
+.index-title::before {
+  content: "▌";
+  display: inline-block;
+  width: 0.7em;
+  margin-right: 0.12em;
+  opacity: 0;
+  color: #e0a040;
+  font-family: VT323, ui-monospace, monospace;
+  font-weight: 400;
+}
+
+.index a:hover,
+.index a:focus-visible {
+  color: #e0a040;
+}
+
+.index a:hover time,
+.index a:hover .index-title,
+.index a:focus-visible time,
+.index a:focus-visible .index-title {
+  color: #e0a040;
+  text-shadow: 0 0 6px rgb(224 160 64 / 0.35);
+}
+
+.index a:hover .index-title::before,
+.index a:focus-visible .index-title::before {
+  opacity: 1;
+  animation: caret-blink 1.05s steps(1, end) infinite;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .index-wait,
+  .index-in {
+    animation: none;
+    opacity: 1;
+  }
+
+  .index a:hover .index-title::before,
+  .index a:focus-visible .index-title::before {
+    animation: none;
+    opacity: 1;
+  }
 }
 
 @media (max-width: 40rem) {
   .index a {
-    grid-template-columns: 6.7rem minmax(0, 1fr);
+    grid-template-columns: 7.5rem minmax(0, 1fr);
     column-gap: 0.9rem;
   }
 
