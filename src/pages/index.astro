@@ -4,26 +4,12 @@ import { formatDate, isoDate } from '../utils/date';
 import { getPosts } from '../utils/posts';
 
 const posts = await getPosts();
-const memory = "MEMORY TEST".split("");
 ---
 
 <Base home>
   <p class="memtest" aria-label="MEMORY TEST... OK">
-    <span class="memtest-run" aria-hidden="true">
-      <span class="mem-lead">
-        {
-          memory.map((ch, i) => (
-            <span class="mem-ch" style={`--i:${i}`}>
-              {ch}
-            </span>
-          ))
-        }
-        <span class="mem-dots">
-          <span style="--d:0">.</span>
-          <span style="--d:1">.</span>
-          <span style="--d:2">.</span>
-        </span>
-      </span>
+    <span class="memtest-run">
+      <span class="mem-lead">MEMORY TEST...</span>
       <span class="mem-ok">OK</span>
     </span>
   </p>
