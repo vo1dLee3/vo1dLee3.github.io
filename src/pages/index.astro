@@ -8,9 +8,12 @@ const posts = await getPosts();
 
 <Base home>
   <p class="memtest" aria-label="MEMORY TEST... OK">
-    <span class="memtest-run">
-      <span class="mem-lead">MEMORY TEST...</span>
-      <span class="mem-ok">OK</span>
+    <span class="crt">
+      <span class="crt-beam" aria-hidden="true"></span>
+      <span class="memtest-run" data-text="MEMORY TEST... OK">
+        <span class="mem-lead">MEMORY TEST...</span>
+        <span class="mem-ok">OK</span>
+      </span>
     </span>
   </p>
   {
